@@ -174,8 +174,9 @@ class SBUMenuViewController: SBUBaseViewController, UITableViewDelegate, UITable
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.tapHandlerToMenu?(self.itemTypes[indexPath.row])
-        self.dismiss(animated: true)
+        self.dismiss(animated: true) {
+            self.tapHandlerToMenu?(self.itemTypes[indexPath.row])
+        }
     }
 
     // MARK: - UICollectionView relations

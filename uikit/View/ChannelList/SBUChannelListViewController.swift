@@ -31,9 +31,6 @@ open class SBUChannelListViewController: SBUBaseChannelListViewController {
     public var emptyView: UIView? = nil {
         didSet {
             self.tableView.backgroundView = self.emptyView
-            if let emptyView = self.emptyView as? SBUEmptyView {
-                emptyView.reloadData((self.channelList.count == 0) ? .noChannels : .none)
-            }
         }
     }
     

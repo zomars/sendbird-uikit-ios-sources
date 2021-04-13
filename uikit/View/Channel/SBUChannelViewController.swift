@@ -125,7 +125,6 @@ open class SBUChannelViewController: SBUBaseChannelViewController {
     let spacer = UIView()
 
     private var newMessagesCount: Int = 0
-    private var touchedPoint: CGPoint = .zero
 
     
     // MARK: - Logic properties (Public)
@@ -604,6 +603,7 @@ open class SBUChannelViewController: SBUBaseChannelViewController {
     
     /// This function increases the new message count.
     public override func increaseNewMessageCount() {
+        guard !isScrollNearBottom() else { return }
         super.increaseNewMessageCount()
         
         self.setNewMessageInfoView(hidden: false)
@@ -1176,8 +1176,9 @@ open class SBUChannelViewController: SBUBaseChannelViewController {
     
     // MARK: - ScrollView
     
-    public override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        super.scrollViewDidScroll(scrollView)
+    open func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard scrollView == self.tableView else { return }
+        
         self.lastSeenIndexPath = nil
         
         if isScrollNearBottom() {
@@ -1207,6 +1208,11 @@ open class SBUChannelViewController: SBUBaseChannelViewController {
         
         guard hide != self.scrollBottomView?.isHidden else { return }
         self.scrollBottomView?.isHidden = hide
+    }
+    
+    public override func scrollToBottom(animated: Bool) {
+        self.newMessagesCount = 0
+        super.scrollToBottom(animated: animated)
     }
     
 

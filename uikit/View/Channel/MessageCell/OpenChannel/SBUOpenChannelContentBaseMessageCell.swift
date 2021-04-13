@@ -131,15 +131,19 @@ open class SBUOpenChannelContentBaseMessageCell: SBUOpenChannelBaseMessageCell {
         super.setupStyles()
         
         if let mainContainerView = self.mainContainerView as? SBUSelectableStackView {
-            mainContainerView.setupStyles()
-            
             if self.isFileType {
+                mainContainerView.leftBackgroundColor = self.theme.leftBackgroundColor
+                mainContainerView.leftPressedBackgroundColor = self.theme.leftPressedBackgroundColor
+                
                 mainContainerView.layer.cornerRadius = 12
                 mainContainerView.clipsToBounds = true
             }
             else {
                 mainContainerView.leftBackgroundColor = .clear
+                mainContainerView.leftPressedBackgroundColor = .clear
             }
+            
+            mainContainerView.setupStyles()
         }
         
         if let userNameView = self.userNameView as? SBUUserNameView {

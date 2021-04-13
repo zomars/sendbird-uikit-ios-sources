@@ -90,21 +90,16 @@ enum SBUIconSetType: String, Hashable {
     
     /// Apply tint & resize to given values
     /// - Parameters:
-    ///     - tintColor: Tint color to apply to the icon. Tint is only applied to default icons. (Not applied for customized icons)
-    ///     - size: Size for the icon to be resized to. Resizing is applied to default icons *AND* to customized icons in specific views.
-    ///     - forceResizeCustomized: Whether to resized icons even if it's customized.
+    ///     - tintColor: Tint color to apply to the icon. Tint is applied to default icons according to `tintAndResize` flag.
+    ///     - size: Size for the icon to be resized to. Resizing is applied to default icons according to `tintAndResize` flag.
+    ///     - tintAndResize: Whether to apply tint & resized icons for customized icons as well.
     /// - Returns: `UIImage` with tint applied & resized if possible.
-    func image(with tintColor: UIColor? = nil, to size: CGSize, forceResizeCustomized: Bool = true) -> UIImage {
+    func image(with tintColor: UIColor? = nil, to size: CGSize, tintAndResize: Bool = true) -> UIImage {
         // Prevents customized icons from being applied with tintColor.
         let isCustomized = SBUIconSetType.customizedIcons.contains(self)
-        if isCustomized {
-            // No tint. only resize if it should.
-            guard forceResizeCustomized else { return self.image }
-            
-            return self.image.resize(with: size)
-        }
         
-        // Not customized.
+        // return unmodified (no tint & resize) image if it's a customized icon and doesn't allow effects.
+        guard !isCustomized || tintAndResize else { return self.image}
         
         // Apply tint.
         let resultImage = self.image.sbu_with(tintColor: tintColor)

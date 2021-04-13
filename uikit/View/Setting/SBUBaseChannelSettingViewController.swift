@@ -260,6 +260,11 @@ open class SBUBaseChannelSettingViewController: SBUBaseViewController {
             
             SBULog.info("Channel loaded: \(String(describing: channel))")
             self.baseChannel = channel
+            
+            if let userInfoView = self.userInfoView as? SBUChannelSettingsUserInfoView {
+                userInfoView.configure(channel: self.baseChannel)
+            }
+            
             self.updateStyles()
         }
         
@@ -268,6 +273,11 @@ open class SBUBaseChannelSettingViewController: SBUBaseViewController {
             
             SBULog.info("Channel changed: \(String(describing: channel))")
             self.baseChannel = channel
+            
+            if let userInfoView = self.userInfoView as? SBUChannelSettingsUserInfoView {
+                userInfoView.configure(channel: self.baseChannel)
+            }
+            
             self.updateStyles()
         }
         

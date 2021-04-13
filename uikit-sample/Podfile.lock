@@ -1,16 +1,16 @@
 PODS:
-  - SendBirdSDK (3.0.218)
+  - SendBirdSDK (3.0.221)
 
 DEPENDENCIES:
-  - SendBirdSDK (= 3.0.218)
+  - SendBirdSDK (~> 3.0.216)
 
 SPEC REPOS:
   trunk:
     - SendBirdSDK
 
 SPEC CHECKSUMS:
-  SendBirdSDK: d53a448ecbc9e6c5f58a3ab0510c4295954a20ee
+  SendBirdSDK: 827f147ca14355aff99ef0b2d02fd4fe047895d1
 
-PODFILE CHECKSUM: 0ce8a0a3d62bb1df13ffd87432b9e0d10073fc41
+PODFILE CHECKSUM: f78eaebdda927275da81221b2b2ad0dd6cd8e546
 
 COCOAPODS: 1.10.1

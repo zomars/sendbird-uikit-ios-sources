@@ -32,7 +32,7 @@ extension Date {
     
     func toString(formatString: String) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = formatString
+        formatter.setLocalizedDateFormatFromTemplate(formatString)
         return formatter.string(from: self)
     }
  

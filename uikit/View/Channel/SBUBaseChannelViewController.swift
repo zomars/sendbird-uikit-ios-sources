@@ -1316,13 +1316,6 @@ extension SBUBaseChannelViewController: UITableViewDelegate, UITableViewDataSour
             self.channelViewModel?.loadNextMessages()
         }
     }
-    
-    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        //NOTE: do not bounds to bottom if size is less than content size
-        if scrollView.contentSize.height < scrollView.frame.height {
-            scrollView.contentOffset.y = 0
-        }
-    }
 }
 
 // MARK: - SBUUserProfileViewDelegate

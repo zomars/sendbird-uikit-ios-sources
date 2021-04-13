@@ -1462,8 +1462,9 @@ open class SBUOpenChannelViewController: SBUBaseChannelViewController {
         self.newMessageInfoView?.isHidden = shouldHide
     }
     
-    public override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        super.scrollViewDidScroll(scrollView)
+    open func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard scrollView == self.tableView else { return }
+        
         self.lastSeenIndexPath = nil
         
         if isScrollNearBottom() {

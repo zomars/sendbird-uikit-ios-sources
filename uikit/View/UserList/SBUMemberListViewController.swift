@@ -167,7 +167,7 @@ open class SBUMemberListViewController: SBUBaseViewController {
     /// - Parameters:
     ///   - channelUrl: Channel url string
     ///   - type: Channel member list type (default: `.channelMembers`)
-    @available(*, deprecated, message: "deprecated in 2.1.???", renamed: "init(channelUrl:channelType:memberListType:)")
+    @available(*, deprecated, message: "deprecated in 2.1.0", renamed: "init(channelUrl:channelType:memberListType:)")
     public init(channelUrl: String, type: ChannelMemberListType = .channelMembers) {
         super.init(nibName: nil, bundle: nil)
         SBULog.info("")
@@ -212,7 +212,7 @@ open class SBUMemberListViewController: SBUBaseViewController {
     ///   - members: `SBUUser` array object
     ///   - type: Channel member list type (default: `.channelMembers`)
     /// - Since: 1.2.0
-    @available(*, deprecated, message: "deprecated in 2.1.???", renamed: "init(channelUrl:channelType:members:memberListType:)")
+    @available(*, deprecated, message: "deprecated in 2.1.0", renamed: "init(channelUrl:channelType:members:memberListType:)")
     public init(channelUrl: String,
                 members: [SBUUser],
                 type: ChannelMemberListType = .channelMembers) {
@@ -421,7 +421,6 @@ open class SBUMemberListViewController: SBUBaseViewController {
         
         memberListViewModel.channelLoadedObservable.observe { [weak self] channel in
             guard let self = self else { return }
-            guard let channel = channel as? SBDGroupChannel else { return }
 
             SBULog.info("Channel loaded: \(String(describing: channel))")
             self.channel = channel
@@ -433,7 +432,6 @@ open class SBUMemberListViewController: SBUBaseViewController {
         
         memberListViewModel.channelChangedObservable.observe { [weak self] channel in
             guard let self = self else { return }
-            guard let channel = channel as? SBDGroupChannel else { return }
 
             SBULog.info("Channel changed: \(String(describing: channel))")
             self.channel = channel
