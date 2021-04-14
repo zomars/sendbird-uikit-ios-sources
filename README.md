@@ -1,12 +1,13 @@
-# Sendbird UIKit for iOS sample
+# Sendbird UIKit for iOS
 ![Platform](https://img.shields.io/badge/platform-iOS-orange.svg)
 ![Languages](https://img.shields.io/badge/language-Swift-orange.svg)
 
 ## Introduction
 
-Sendbird UIKit for iOS is a development kit with an user interface that enables an easy and fast integration of standard chat features into new or existing client apps. Here is a UIKit sample for iOS in the submodule which you can download and test basic chat features and various customization. 
+Sendbird UIKit for iOS is a development kit with an user interface that enables an easy and fast integration of standard chat features into new or existing client apps. This repository houses the UIKit source code in addition to a UIKit sample as explained below.
 
-- **SendBirdUIKit-Sample** is a chat app which contains custom sample code for various key features written in `Swift`. 
+- **uikit** is where you can find the open source code. Check out [UIKit Open Source Guidelines](https://github.com/sendbird/sendbird-uikit-ios-sources/blob/main/OPENSOURCE_GUIDELINES.md) for more information regarding our stance on open source.
+- **uikit-sample** is a chat app which contains custom sample code for various key features written in `Swift`. 
 
 ### More about Sendbird UIKIT for iOS
 
