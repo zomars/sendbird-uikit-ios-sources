@@ -185,7 +185,6 @@
 		C6D3DDB526141C00003E6DCB /* SBUChannelSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D3DD5E26141C00003E6DCB /* SBUChannelSettingsViewController.swift */; };
 		C6D3DDB626141C00003E6DCB /* SBUCreateChannelTypeSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D3DD6026141C00003E6DCB /* SBUCreateChannelTypeSelector.swift */; };
 		C6D3DDB726141C00003E6DCB /* SBUCreateChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D3DD6126141C00003E6DCB /* SBUCreateChannelViewController.swift */; };
-		C6D3DDB826141C00003E6DCB /* SBUCreateOpenChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D3DD6226141C00003E6DCB /* SBUCreateOpenChannelViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -373,7 +372,6 @@
 		C6D3DD5E26141C00003E6DCB /* SBUChannelSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBUChannelSettingsViewController.swift; sourceTree = "<group>"; };
 		C6D3DD6026141C00003E6DCB /* SBUCreateChannelTypeSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBUCreateChannelTypeSelector.swift; sourceTree = "<group>"; };
 		C6D3DD6126141C00003E6DCB /* SBUCreateChannelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBUCreateChannelViewController.swift; sourceTree = "<group>"; };
-		C6D3DD6226141C00003E6DCB /* SBUCreateOpenChannelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBUCreateOpenChannelViewController.swift; sourceTree = "<group>"; };
 		D9AA853E66DC6613E1CCFB10 /* Pods-SendBirdUIKit-Sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SendBirdUIKit-Sample.release.xcconfig"; path = "Target Support Files/Pods-SendBirdUIKit-Sample/Pods-SendBirdUIKit-Sample.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1091,7 +1089,6 @@
 			children = (
 				C6D3DD6026141C00003E6DCB /* SBUCreateChannelTypeSelector.swift */,
 				C6D3DD6126141C00003E6DCB /* SBUCreateChannelViewController.swift */,
-				C6D3DD6226141C00003E6DCB /* SBUCreateOpenChannelViewController.swift */,
 			);
 			path = CreateChannel;
 			sourceTree = "<group>";
@@ -1236,7 +1233,6 @@
 				C6D3DC6D261411EA003E6DCB /* UIColor+SBUIKit.swift in Sources */,
 				C6D3DD6426141C00003E6DCB /* SBUBaseViewController.swift in Sources */,
 				C6D3DD8826141C00003E6DCB /* SBUContentBaseMessageCell.swift in Sources */,
-				C6D3DDB826141C00003E6DCB /* SBUCreateOpenChannelViewController.swift in Sources */,
 				9CDDA30324B47FF200F77A59 /* CustomUserCell.swift in Sources */,
 				C6D3DDB526141C00003E6DCB /* SBUChannelSettingsViewController.swift in Sources */,
 				C6D3DD8F26141C00003E6DCB /* SBUUserNameView.swift in Sources */,
