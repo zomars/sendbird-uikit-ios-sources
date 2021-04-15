@@ -238,4 +238,10 @@ class SBUChannelTitleView: UIView {
             typingMembers.count != 0 else { return nil }
         return SBUStringSet.Channel_Header_Typing(typingMembers)
     }
+    
+    override var intrinsicContentSize: CGSize {
+        //NOTE: this is under assumption that this view is used in
+        //navigation and / or stack view to shrink but keep max width
+        return CGSize(width: 100000, height: self.frame.height)
+    }
 }

@@ -77,14 +77,10 @@ extension Date {
             .dateComponents([.day, .month, .year], from: baseDate)
         let currDateComponents = Calendar.current
             .dateComponents([.day, .month, .year], from: currDate)
-        let dateFormatter = DateFormatter()
         
         if baseDateComponents.year != currDateComponents.year ||
             baseDateComponents.month != currDateComponents.month ||
             baseDateComponents.day != currDateComponents.day {
-            
-            dateFormatter.dateStyle = .short
-            dateFormatter.timeStyle = .none
 
             if baseDateComponents.day != currDateComponents.day {
                 let interval = (currDateComponents.day ?? 0) - (baseDateComponents.day ?? 0)
@@ -96,10 +92,7 @@ extension Date {
             return baseDate.toString(format: .MMMdd)
         }
         else {
-            dateFormatter.dateStyle = .none
-            dateFormatter.timeStyle = .short
-            
-            return dateFormatter.string(from: baseDate)
+            return baseDate.toString(format: .hhmma)
         }
     }
     
