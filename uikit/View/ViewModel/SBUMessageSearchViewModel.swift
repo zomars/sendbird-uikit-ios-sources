@@ -85,20 +85,6 @@ class SBUMessageSearchViewModel: SBULoadableViewModel {
         }
     }
     
-    // MARK: - Cell Datasource
-    
-    func resultSize() -> Int {
-        return self.searchResultList.count
-    }
-    
-    func message(at indexPath: IndexPath) -> SBDBaseMessage? {
-        let row = indexPath.row
-        guard row >= 0 && row < self.searchResultList.count else { return nil }
-        
-        return self.searchResultList[row]
-    }
-    
-    
     // MARK: - SBUViewModelDelegate
     
     override func dispose() {

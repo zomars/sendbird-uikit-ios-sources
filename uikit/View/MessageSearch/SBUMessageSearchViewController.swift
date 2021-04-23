@@ -38,6 +38,11 @@ open class SBUMessageSearchViewController: SBUBaseViewController {
     /// `limit` will be set to default value of `defaultSearchLimit` in case if it's set to 0 or smaller value.
     public var customMessageSearchQueryBuilder: ((SBDMessageSearchQueryBuilder) -> Void)? = nil
     
+    /// The search result list. Use this list to locate the `SBDBaseMessage` object from the `tableView`.
+    public var searchResultList: [SBDBaseMessage] {
+        return self.messageSearchViewModel?.searchResultList ?? []
+    }
+    
     // MARK: - Properties (View)
     
     /// Message search result's cell.
@@ -218,7 +223,7 @@ open class SBUMessageSearchViewController: SBUBaseViewController {
             guard let self = self else { return }
             
             if let emptyView = self.emptyView as? SBUEmptyView {
-                emptyView.reloadData(messageSearchViewModel.resultSize() == 0 ? .error : .none)
+                emptyView.reloadData(self.searchResultList.count == 0 ? .error : .none)
             }
             
             self.didReceiveError(error.localizedDescription)
@@ -228,7 +233,7 @@ open class SBUMessageSearchViewController: SBUBaseViewController {
             guard let self = self else { return }
             
             if let emptyView = self.emptyView as? SBUEmptyView {
-                emptyView.reloadData(messageSearchViewModel.resultSize() == 0 ? .noSearchResults : .none)
+                emptyView.reloadData(self.searchResultList.count == 0 ? .noSearchResults : .none)
             }
             
             self.tableView.reloadData()
@@ -390,6 +395,17 @@ open class SBUMessageSearchViewController: SBUBaseViewController {
         }
     }
     
+    /// Retrives the `SBDBaseMessage` object from the given `IndexPath` of the tableView.
+    /// - Parameter indexPath: `IndexPath` of which you want to retrieve the `SBDMessage` object.
+    /// - Returns: `SBDBaseMessage` object of the corresponding `IndexPath`, or `nil` if the message can't be found.
+    /// - Since: 2.1.5
+    open func message(at indexPath: IndexPath) -> SBDBaseMessage? {
+        let row = indexPath.row
+        guard row >= 0 && row < self.searchResultList.count else { return nil }
+        
+        return self.searchResultList[row]
+    }
+    
     func keyboardDidHide(_ notification: Notification) {
         self.enableCancelButton()
     }
@@ -434,7 +450,7 @@ open class SBUMessageSearchViewController: SBUBaseViewController {
 extension SBUMessageSearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.messageSearchViewModel?.resultSize() ?? 0
+        return self.searchResultList.count
     }
     
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -442,7 +458,7 @@ extension SBUMessageSearchViewController: UITableViewDelegate, UITableViewDataSo
         guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
                 as? SBUMessageSearchResultCell else { fatalError() }
         
-        guard let baseMessage = self.messageSearchViewModel?.message(at: indexPath) else { return cell }
+        guard let baseMessage = self.message(at: indexPath) else { return cell }
 
         cell.configure(message: baseMessage)
         cell.setupStyles()
@@ -451,7 +467,7 @@ extension SBUMessageSearchViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let message = self.messageSearchViewModel?.message(at: indexPath) else { return }
+        guard let message = self.message(at: indexPath) else { return }
         
         let highlightInfo = SBUHighlightMessageInfo(messageId: message.messageId,
                                                     updatedAt: message.updatedAt)
@@ -461,10 +477,9 @@ extension SBUMessageSearchViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let messageSearchViewModel = self.messageSearchViewModel,
-              indexPath.row >= messageSearchViewModel.resultSize() - 1 else { return }
+        guard indexPath.row >= self.searchResultList.count - 1 else { return }
         
-        messageSearchViewModel.loadMore()
+        self.messageSearchViewModel?.loadMore()
     }
     
     open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
