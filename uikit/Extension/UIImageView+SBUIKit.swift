@@ -130,20 +130,32 @@ internal extension UIImageView {
             return nil
         }
         
-        let asset = AVAsset(url: url)
-        let avAssetImageGenerator = AVAssetImageGenerator(asset: asset)
-        avAssetImageGenerator.appliesPreferredTrackTransform = true
-        let cmTime = CMTimeMake(value: 2, timescale: 1)
-        guard let cgImage = try? avAssetImageGenerator
-            .copyCGImage(at: cmTime, actualTime: nil) else { return nil }
-        
-        let image = UIImage(cgImage: cgImage)
-        
-        if let data = image.pngData() {
-            SBUCacheManager.savedImage(fileName: fileName, data: data)
+        let task = URLSession(configuration: .default).dataTask(with: url) { [weak self] data, response, error in
+            guard let self = self, let asset = data?.getAVAsset() else {
+                completion?(false)
+                return
+            }
+            
+            let avAssetImageGenerator = AVAssetImageGenerator(asset: asset)
+            avAssetImageGenerator.appliesPreferredTrackTransform = true
+            let cmTime = CMTimeMake(value: 2, timescale: 1)
+            guard let cgImage = try? avAssetImageGenerator
+                .copyCGImage(at: cmTime, actualTime: nil) else {
+                completion?(false)
+                return
+            }
+            
+            let image = UIImage(cgImage: cgImage)
+            DispatchQueue.main.async {
+                if let data = image.pngData() {
+                    SBUCacheManager.savedImage(fileName: fileName, data: data)
+                }
+                self.setImage(image, completion: completion)
+            }
         }
-        self.setImage(image, completion: completion)
-        return nil
+        
+        task.resume()
+        return task
     }
     
     
