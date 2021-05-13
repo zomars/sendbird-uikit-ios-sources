@@ -175,7 +175,7 @@ Go to your Xcode project's **Signing & Capabilities** tab. Then, click **+ Capab
 
 UIKit is distributed in the form of a fat binary, which contains information on both **Simulator** and **Device** architectures. Add the script below if you are planning to distribute your application in the App Store and wish to remove unnecessary architectures in the application's build phase.
 
-Go to your Xcode project target's **Build Phases** tab. Then, click + and select **New Run Script Phase**. Append this script.
+Go to your Xcode project target's **Build Phases** tab. Then, click **+** and select **New Run Script Phase**. Append this script.
 
 ```Light Color Skin
 APP_PATH="${TARGET_BUILD_DIR}/${WRAPPER_NAME}"
