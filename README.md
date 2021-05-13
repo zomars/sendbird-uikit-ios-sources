@@ -137,6 +137,78 @@ fi
 
 <br />
 
+## Get attachment permission
+
+Sendbird UIKit offers features to attach or save files such as photos, videos, and documents. To use those features, you need to request permission from end users.
+
+#### Media attachment permission
+
+Applications must acquire permission to use end users’ photo assets or to save assets into their library. Once the permission is granted, users can send image or video messages and save media assets.
+
+```Light Color Skin
+...
+<key>NSPhotoLibraryUsageDescription</key>
+    <string>$(PRODUCT_NAME) would like access to your photo library</string>
+<key>NSCameraUsageDescription</key>
+    <string>$(PRODUCT_NAME) would like to use your camera</string>
+<key>NSMicrophoneUsageDescription</key>
+    <string>$(PRODUCT_NAME) would like to use your microphone (for videos)</string>
+<key>NSPhotoLibraryAddUsageDescription</key>
+    <string>$(PRODUCT_NAME) would like to save photos to your photo library</string>
+...
+```
+
+
+![The information property list editor, which let you configure media attachment permission.](https://static.sendbird.com/docs/uikit/ios/getting-started-02_20200416.png)
+
+#### *(Optional)* Document attachment permission
+
+If you want to allow your users to attach files from `iCloud` to messages, you must activate the `iCloud` feature. Once it is activated, users can also send a message with files from `iCloud`.
+
+Go to your Xcode project's **Signing & Capabilities** tab. Then, click **+ Capability** button and select **iCloud**. Check **iCloud Documents**.
+
+![Configuring options to allow your users to attaching files from iCloud to messages in the Signing & Capabilities tab.](https://static.sendbird.com/docs/uikit/ios/getting-started-03_20200416.png)
+
+<br />
+
+## Distribution setting
+
+UIKit is distributed in the form of a fat binary, which contains information on both **Simulator** and **Device** architectures. Add the script below if you are planning to distribute your application in the App Store and wish to remove unnecessary architectures in the application's build phase.
+
+Go to your Xcode project target's **Build Phases** tab. Then, click + and select **New Run Script Phase**. Append this script.
+
+```Light Color Skin
+APP_PATH="${TARGET_BUILD_DIR}/${WRAPPER_NAME}"
+
+# This script loops through the frameworks embedded in the application and
+# removes unused architectures.
+find "$APP_PATH" -name '*.framework' -type d | while read -r FRAMEWORK
+do
+    FRAMEWORK_EXECUTABLE_NAME=$(defaults read "$FRAMEWORK/Info.plist" CFBundleExecutable)
+    FRAMEWORK_EXECUTABLE_PATH="$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME"
+    echo "Executable is $FRAMEWORK_EXECUTABLE_PATH"
+
+    EXTRACTED_ARCHS=()
+
+    for ARCH in $ARCHS
+    do
+        echo "Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME"
+        lipo -extract "$ARCH" "$FRAMEWORK_EXECUTABLE_PATH" -o "$FRAMEWORK_EXECUTABLE_PATH-$ARCH"
+        EXTRACTED_ARCHS+=("$FRAMEWORK_EXECUTABLE_PATH-$ARCH")
+    done
+
+    echo "Merging extracted architectures: ${ARCHS}"
+    lipo -o "$FRAMEWORK_EXECUTABLE_PATH-merged" -create "${EXTRACTED_ARCHS[@]}"
+    rm "${EXTRACTED_ARCHS[@]}"
+
+    echo "Replacing original executable with thinned version"
+    rm "$FRAMEWORK_EXECUTABLE_PATH"
+    mv "$FRAMEWORK_EXECUTABLE_PATH-merged" "$FRAMEWORK_EXECUTABLE_PATH"
+done
+```
+
+<br />
+
 ## UIKit features and ways to customize 
 
 Here is an overview of a list of items you can use to customize the UIKit. 
