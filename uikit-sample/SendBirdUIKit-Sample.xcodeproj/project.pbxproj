@@ -16,6 +16,8 @@
 		9C32648324B38FAF000F8313 /* ChannelSettingsVC_Overriding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C32648224B38FAF000F8313 /* ChannelSettingsVC_Overriding.swift */; };
 		9C32648524B3907E000F8313 /* CreateChannelVC_UserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C32648424B3907E000F8313 /* CreateChannelVC_UserList.swift */; };
 		9C32648724B39090000F8313 /* InviteUserVC_UserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C32648624B39090000F8313 /* InviteUserVC_UserList.swift */; };
+		9C33BD74265E4D41005FB11F /* Data+SBUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C33BD72265E4D41005FB11F /* Data+SBUIKit.swift */; };
+		9C33BD75265E4D41005FB11F /* String+SBUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C33BD73265E4D41005FB11F /* String+SBUIKit.swift */; };
 		9C56414C24AF29C00057B529 /* CustomSampleEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C56414B24AF29C00057B529 /* CustomSampleEnums.swift */; };
 		9C56415424AF99E70057B529 /* ChannelVC_MessageParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C56415324AF99E70057B529 /* ChannelVC_MessageParam.swift */; };
 		9C5DCD49242AFA7C00C41106 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C5DCD48242AFA7C00C41106 /* UserNotifications.framework */; };
@@ -198,6 +200,8 @@
 		9C32648224B38FAF000F8313 /* ChannelSettingsVC_Overriding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelSettingsVC_Overriding.swift; sourceTree = "<group>"; };
 		9C32648424B3907E000F8313 /* CreateChannelVC_UserList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChannelVC_UserList.swift; sourceTree = "<group>"; };
 		9C32648624B39090000F8313 /* InviteUserVC_UserList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteUserVC_UserList.swift; sourceTree = "<group>"; };
+		9C33BD72265E4D41005FB11F /* Data+SBUIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+SBUIKit.swift"; sourceTree = "<group>"; };
+		9C33BD73265E4D41005FB11F /* String+SBUIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+SBUIKit.swift"; sourceTree = "<group>"; };
 		9C56414B24AF29C00057B529 /* CustomSampleEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSampleEnums.swift; sourceTree = "<group>"; };
 		9C56415324AF99E70057B529 /* ChannelVC_MessageParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelVC_MessageParam.swift; sourceTree = "<group>"; };
 		9C5DCD48242AFA7C00C41106 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
@@ -707,6 +711,8 @@
 		C6D3DBD4261411EA003E6DCB /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				9C33BD72265E4D41005FB11F /* Data+SBUIKit.swift */,
+				9C33BD73265E4D41005FB11F /* String+SBUIKit.swift */,
 				C6D3DBD5261411EA003E6DCB /* URL+SBUKit.swift */,
 				C6D3DBD6261411EA003E6DCB /* Array+SBUIKit.swift */,
 				C6D3DBD7261411EA003E6DCB /* UIColor+SBUIKit.swift */,
@@ -1257,6 +1263,7 @@
 				C6D3DD7A26141C00003E6DCB /* OpenChannelCommonContentView.swift in Sources */,
 				9CED4D1524ADE41B00D81B10 /* CreateChannelCustomManager.swift in Sources */,
 				C6D3DC6E261411EA003E6DCB /* Formatter+SBUIKit.swift in Sources */,
+				9C33BD75265E4D41005FB11F /* String+SBUIKit.swift in Sources */,
 				C6D3DDAB26141C00003E6DCB /* SBUInviteUserViewController.swift in Sources */,
 				C6D3DDB226141C00003E6DCB /* SBUModerationsViewController.swift in Sources */,
 				9C2AA7E82561255800C6F6CB /* StreamingChannelListViewController.swift in Sources */,
@@ -1280,6 +1287,7 @@
 				C6D3DD7C26141C00003E6DCB /* ImageContentView.swift in Sources */,
 				C6D3DC71261411EA003E6DCB /* CGSize+SBUIKit.swift in Sources */,
 				C6D3DC7A261411EA003E6DCB /* SBUUtils.swift in Sources */,
+				9C33BD74265E4D41005FB11F /* Data+SBUIKit.swift in Sources */,
 				C6D3DD8C26141C00003E6DCB /* SBUMessageStateView.swift in Sources */,
 				C6D3DD6A26141C00003E6DCB /* SBUChannelActionViewModel.swift in Sources */,
 				9CEB7796250F4A42004AC1D6 /* MySettingsViewController.swift in Sources */,
