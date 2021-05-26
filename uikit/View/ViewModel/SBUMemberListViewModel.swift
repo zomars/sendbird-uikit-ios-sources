@@ -86,7 +86,7 @@ class SBUMemberListViewModel: SBUChannelActionViewModel  {
             // Customized member list
             SBULog.info("\(members.count) customized members have been added.")
             
-            self.resetObservable.set(value: ())
+            self.queryListObservable.set(value: members)
             self.isLoading = false
         }
         else if !self.useCustomList {

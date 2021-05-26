@@ -34,17 +34,19 @@ class SBUObservable<T> {
     func post(value: T, delaySec: Double = 0.1) {
         postLock.lock()
         
-        workItem = DispatchWorkItem { [weak self] in
-            guard let self = self else { return }
-            
-            self.set(value: value)
-        }
-        
         if self.forcedDelay == 0 {
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                
                 self.set(value: value)
             }
         } else {
+            workItem = DispatchWorkItem { [weak self] in
+                guard let self = self else { return }
+                
+                self.set(value: value)
+            }
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + (forcedDelay ?? delaySec), execute: workItem!)
         }
         

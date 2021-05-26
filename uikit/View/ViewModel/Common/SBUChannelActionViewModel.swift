@@ -135,7 +135,7 @@ class SBUChannelActionViewModel: SBULoadableViewModel  {
             }
             
             if let channel = self.channel {
-                self.channelChangedObservable.post(value: channel)
+                self.channelChangedObservable.set(value: channel)
             }
             completionHandler?(true)
         }
@@ -164,7 +164,7 @@ class SBUChannelActionViewModel: SBULoadableViewModel  {
             }
             
             if let channel = self.channel {
-                self.channelChangedObservable.post(value: channel)
+                self.channelChangedObservable.set(value: channel)
             }
             completionHandler?(true)
         }
@@ -189,7 +189,7 @@ class SBUChannelActionViewModel: SBULoadableViewModel  {
             }
             
             if let channel = self.channel {
-                self.channelChangedObservable.post(value: channel)
+                self.channelChangedObservable.set(value: channel)
             }
         }
     }

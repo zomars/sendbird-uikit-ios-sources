@@ -54,7 +54,7 @@ public struct DiskCache {
 
     // MARK: - Properties
     private let fileManager = FileManager.default
-    private let directory = "image"
+    private let directory = "image/"
     private let diskQueue = DispatchQueue(label: "com.sendbird.diskcache", qos: .background)
     
     // MARK: - Initializers
@@ -155,7 +155,7 @@ struct MemoryCache {
     func set(key: String, data: NSData) {
         guard let image = UIImage.createImage(from: data as Data) else { return }
         self.set(key: key, image: image)
-        SBULog.info("[Succeed] The image was stored in the memory cache.")
+//        SBULog.info("[Succeed] The image was stored in the memory cache.")
     }
 
     func getImage(key: String) -> UIImage? {

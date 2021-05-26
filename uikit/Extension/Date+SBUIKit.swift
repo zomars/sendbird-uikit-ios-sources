@@ -16,6 +16,7 @@ extension Date {
         case MMMdd = "MMM dd"
         case hhmma = "hh:mm a"
         case yyyyMMddhhmm = "yyyyMMddhhmm"
+        case yyyyMMddhhmmss = "yyyyMMddhhmmss"
     }
     
     static func from(_ baseTimestamp: Int64) -> Date {
@@ -26,13 +27,18 @@ extension Date {
         return Date(timeIntervalSince1970: timeInterval)
     }
     
-    func toString(format: DateFormat) -> String {
-        self.toString(formatString: format.rawValue)
+    func toString(format: DateFormat, localizedFormat: Bool = true) -> String {
+        self.toString(formatString: format.rawValue, localizedFormat: localizedFormat)
     }
     
-    func toString(formatString: String) -> String {
+    func toString(formatString: String, localizedFormat: Bool = true) -> String {
         let formatter = DateFormatter()
-        formatter.setLocalizedDateFormatFromTemplate(formatString)
+
+        if localizedFormat {
+            formatter.setLocalizedDateFormatFromTemplate(formatString)
+        } else {
+            formatter.dateFormat = formatString
+        }
         return formatter.string(from: self)
     }
  

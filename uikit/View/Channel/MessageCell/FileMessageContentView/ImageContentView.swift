@@ -142,7 +142,9 @@ class ImageContentView: BaseFileContentView {
         self.loadImageSession = self.imageView.loadImage(urlString: urlString,
                                                          option: imageOption,
                                                          thumbnailSize: thumbnailSize) { [weak self] _ in
-            self?.setFileIcon()
+            DispatchQueue.main.async {
+                self?.setFileIcon()
+            }
         }
 
         self.setFileIcon()

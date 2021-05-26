@@ -69,7 +69,7 @@ class SBUMessageSearchViewModel: SBULoadableViewModel {
         query.loadNextPage { [weak self] messageList, error in
             guard let self = self else { return }
             
-            self.loadingObservable.post(value: false)
+            self.loadingObservable.set(value: false)
             
             if let error = error {
                 self.errorObservable.set(value: error)

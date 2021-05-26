@@ -62,15 +62,8 @@ internal extension UIImageView {
     static let error = NSError(domain:"com.sendbird.uikit", code: -1, userInfo: nil)
 
     func createFileName(urlString: String) -> String {
-        guard let filename = urlString.components(separatedBy: "/").last else {
-            return urlString
-        }
-        
-        guard let excludeAuthStr = filename.components(separatedBy: "?auth=").first else {
-            return filename
-        }
-        
-        return excludeAuthStr
+        let filename = "\(urlString.persistantHash)"
+        return filename
     }
     
     func loadOriginalImage(urlString: String,
