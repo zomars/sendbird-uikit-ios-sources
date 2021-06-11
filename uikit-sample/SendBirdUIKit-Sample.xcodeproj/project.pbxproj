@@ -26,6 +26,7 @@
 		9C777D62241B9022006FFE25 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C777D60241B9022006FFE25 /* Main.storyboard */; };
 		9C777D64241B9024006FFE25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C777D63241B9024006FFE25 /* Assets.xcassets */; };
 		9C777D67241B9024006FFE25 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C777D65241B9024006FFE25 /* LaunchScreen.storyboard */; };
+		9CABC7E5267336030097E1C1 /* SBUInviteUserListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CABC7E4267336030097E1C1 /* SBUInviteUserListViewModel.swift */; };
 		9CC8E2F52510C53A00C038A5 /* MySettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC8E2F42510C53A00C038A5 /* MySettingsCell.swift */; };
 		9CDDA30324B47FF200F77A59 /* CustomUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDDA30224B47FF200F77A59 /* CustomUserCell.swift */; };
 		9CDDA30524B4DA8600F77A59 /* MemberListVC_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDDA30424B4DA8600F77A59 /* MemberListVC_Cell.swift */; };
@@ -214,6 +215,7 @@
 		9C777D66241B9024006FFE25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9C777D68241B9024006FFE25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9C777D77241B9078006FFE25 /* SendBirdUIKit-Sample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SendBirdUIKit-Sample.entitlements"; sourceTree = "<group>"; };
+		9CABC7E4267336030097E1C1 /* SBUInviteUserListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBUInviteUserListViewModel.swift; sourceTree = "<group>"; };
 		9CC8E2F42510C53A00C038A5 /* MySettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySettingsCell.swift; sourceTree = "<group>"; };
 		9CDDA30224B47FF200F77A59 /* CustomUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUserCell.swift; sourceTree = "<group>"; };
 		9CDDA30424B4DA8600F77A59 /* MemberListVC_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberListVC_Cell.swift; sourceTree = "<group>"; };
@@ -828,6 +830,7 @@
 		C6D3DCF426141C00003E6DCB /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				9CABC7E4267336030097E1C1 /* SBUInviteUserListViewModel.swift */,
 				C6D3DCF626141C00003E6DCB /* SBUBaseViewController.swift */,
 				C6D3DCF726141C00003E6DCB /* SBUMessageSearchViewModel.swift */,
 				C6D3DCF826141C00003E6DCB /* SBUMemberListViewModel.swift */,
@@ -1381,6 +1384,7 @@
 				C6D3DC6B261411EA003E6DCB /* URL+SBUKit.swift in Sources */,
 				C6D3DC82261411EA003E6DCB /* SBUPendingMessageManager.swift in Sources */,
 				C6D3DD9E26141C00003E6DCB /* SBULayoutableButton.swift in Sources */,
+				9CABC7E5267336030097E1C1 /* SBUInviteUserListViewModel.swift in Sources */,
 				9CED4D0F24ADE3F800D81B10 /* ChannelListCustomManager.swift in Sources */,
 				C6D3DDA626141C00003E6DCB /* SBUMenuViewController.swift in Sources */,
 				9CDDA30D24B555E500F77A59 /* CustomEmptyView.swift in Sources */,

@@ -3,7 +3,7 @@
 //  SendBirdUIKit
 //
 //  Created by Hoon Sung on 2021/02/15.
-//  Copyright © 2021 SendBird, Inc. All rights reserved.
+//  Copyright © 2021 Sendbird, Inc. All rights reserved.
 //
 
 import Foundation
@@ -482,6 +482,7 @@ class SBUChannelViewModel: SBULoadableViewModel {
         }
     }
     
+
     /// Handles response from initial loading request of messages (see `loadInitialMessages(startingPoint:showIndicator:initialMessages:)`).
     /// - Parameters:
     ///   - usedParam: `SBDMessageListParams` used in `loadInitialMessages`, or `nil` if it was called from custom message list.
@@ -525,6 +526,21 @@ class SBUChannelViewModel: SBULoadableViewModel {
         
         self.initialLoadObservable.set(value: messages)
     }
+    
+    
+    // MARK: - Typing
+    func startTypingMessage() {
+        guard let channel = self.channel as? SBDGroupChannel else { return }
+        SBULog.info("[Request] End typing")
+        channel.startTyping()
+    }
+    
+    func endTypingMessage() {
+        guard let channel = self.channel as? SBDGroupChannel else { return }
+        SBULog.info("[Request] End typing")
+        channel.endTyping()
+    }
+    
     
     // MARK: - Handling response
     

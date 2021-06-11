@@ -3,7 +3,7 @@
 //  SendBirdUIKit
 //
 //  Created by Hoon Sung on 2021/02/02.
-//  Copyright © 2021 SendBird, Inc. All rights reserved.
+//  Copyright © 2021 Sendbird, Inc. All rights reserved.
 //
 
 import UIKit

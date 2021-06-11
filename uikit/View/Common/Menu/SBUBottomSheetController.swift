@@ -3,7 +3,7 @@
 //  SendBirdUIKit
 //
 //  Created by Harry Kim on 2020/04/26.
-//  Copyright © 2020 SendBird, Inc. All rights reserved.
+//  Copyright © 2020 Sendbird, Inc. All rights reserved.
 //
 
 import UIKit
@@ -14,7 +14,7 @@ enum SBUBottomSheetSnapPoint {
     case close
 }
 
-protocol SBUBottomSheetControllerDelegate: class {
+protocol SBUBottomSheetControllerDelegate: AnyObject {
     func bottomSheet(moveTo position: SBUBottomSheetSnapPoint)
 }
 

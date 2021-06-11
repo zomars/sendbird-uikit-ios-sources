@@ -3,7 +3,7 @@
 //  SendBirdUIKit
 //
 //  Created by Hoon Sung on 2021/03/15.
-//  Copyright © 2021 SendBird, Inc. All rights reserved.
+//  Copyright © 2021 Sendbird, Inc. All rights reserved.
 //
 
 import UIKit
@@ -268,7 +268,7 @@ open class SBUBaseChannelSettingViewController: SBUBaseViewController {
             self.updateStyles()
         }
         
-        self.channelActionViewModel.channelChangedObservable.observe { [weak self] channel in
+        self.channelActionViewModel.channelChangedObservable.observe { [weak self] channel, _ in
             guard let self = self else { return }
             
             SBULog.info("Channel changed: \(String(describing: channel))")
