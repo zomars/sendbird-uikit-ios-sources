@@ -22,6 +22,7 @@ class SBUMenuViewController: SBUBaseViewController, UITableViewDelegate, UITable
     let message: SBDBaseMessage
     let itemTypes: [MessageMenuItem]
     let emojiList: [SBDEmoji] = SBUEmojiManager.getAllEmojis()
+    var useReaction: Bool
 
     let maxEmojiOneLine = 6
 
@@ -38,14 +39,16 @@ class SBUMenuViewController: SBUBaseViewController, UITableViewDelegate, UITable
     required public init?(coder: NSCoder) {
         self.message = SBDBaseMessage()
         self.itemTypes = []
+        self.useReaction = false
         super.init(coder: coder)
     }
 
     /// Use this function when initialize.
     /// - Parameter itemTypes: Menu item types
-    init(message: SBDBaseMessage, itemTypes: [MessageMenuItem]) {
+    init(message: SBDBaseMessage, itemTypes: [MessageMenuItem], useReaction: Bool) {
         self.message = message
         self.itemTypes = itemTypes
+        self.useReaction = useReaction
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -68,7 +71,7 @@ class SBUMenuViewController: SBUBaseViewController, UITableViewDelegate, UITable
         self.tableView.estimatedRowHeight = 56
         self.tableView.backgroundColor = .clear
 
-        if SBUEmojiManager.useReaction, !emojiList.isEmpty {
+        if useReaction, !emojiList.isEmpty {
             self.tableView.tableHeaderView = UIView(frame: .init(x: 0, y: 0, width: 0, height: 76))
             self.tableView.tableHeaderView?.addSubview(self.collectionView)
 

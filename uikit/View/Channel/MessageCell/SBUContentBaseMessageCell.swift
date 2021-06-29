@@ -38,6 +38,8 @@ open class SBUContentBaseMessageCell: SBUBaseMessageCell {
     
     public lazy var profileView: UIView = SBUMessageProfileView()
     public lazy var stateView: UIView = SBUMessageStateView()
+    
+    public var useReaction = false
 
 
     // MARK: - Private property
@@ -169,6 +171,7 @@ open class SBUContentBaseMessageCell: SBUBaseMessageCell {
         
         self.reactionView.configure(
             maxWidth: SBUConstant.imageSize.width,
+            useReaction: self.useReaction,
             reactions: message.reactions
         )
         

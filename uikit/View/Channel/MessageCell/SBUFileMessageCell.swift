@@ -49,8 +49,10 @@ open class SBUFileMessageCell: SBUContentBaseMessageCell {
     open func configure(_ message: SBDFileMessage,
                           hideDateView: Bool,
                           groupPosition: MessageGroupPosition,
-                          receiptState: SBUMessageReceiptState?) {
-
+                          receiptState: SBUMessageReceiptState?,
+                          useReaction: Bool) {
+        self.useReaction = useReaction
+        
         let position = SBUGlobals.CurrentUser?.userId == message.sender?.userId ?
             MessagePosition.right :
             MessagePosition.left

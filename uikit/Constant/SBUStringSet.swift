@@ -78,6 +78,8 @@ public class SBUStringSet: NSObject {
         }
     }
     public static var Channel_Success_Download_file = "File saved."
+    public static var Channel_Failure_Download_file = "Couldn’t download file."
+    public static var Channel_Failure_Open_file = "Couldn’t open file."
     public static var Channel_New_Message_File = "uploaded a file"
     public static var Channel_New_Message: (Int) -> String = { count in
         switch count {

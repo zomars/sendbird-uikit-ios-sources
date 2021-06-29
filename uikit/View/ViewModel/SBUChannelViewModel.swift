@@ -83,7 +83,7 @@ class SBUChannelViewModel: SBULoadableViewModel {
         if self.messageListParams.nextResultSize <= 0 { self.messageListParams.nextResultSize = self.defaultFetchLimit }
         
         self.messageListParams.reverse = true
-        self.messageListParams.includeReactions = SBUEmojiManager.useReaction
+        self.messageListParams.includeReactions = SBUEmojiManager.useReaction(channel: channel)
         
         self.messageCache.updateParam(param: self.messageListParams)
     }
@@ -283,20 +283,18 @@ class SBUChannelViewModel: SBULoadableViewModel {
     /// - Returns: Whether there's more messages to fetch or not.
     private func handleChangelogResponse(addedMessages: [SBDBaseMessage]) -> Bool {
         var mergedList: [SBDBaseMessage]? = nil
+        let hasMore = addedMessages.count >= self.changelogFetchLimit
         
-        if addedMessages.count < self.changelogFetchLimit {
-            // fetched to the recent
-            if self.hasNext {
-                self.hasNext = false
-                mergedList = self.messageCache.flush(with: addedMessages)
-            }
+        if !hasMore, self.hasNext {
+            self.hasNext = false
+            mergedList = self.messageCache.flush(with: addedMessages)
         }
         
         self.messageFetchedObservable.set(value: (mergedList ?? addedMessages, true))
         
         SBULog.info("Loaded added messages : \(addedMessages.count), hasNext : \(self.hasNext)")
         
-        return addedMessages.count >= self.changelogFetchLimit && !self.hasNext
+        return hasMore
     }
     
     

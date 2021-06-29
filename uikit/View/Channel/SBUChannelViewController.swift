@@ -539,9 +539,6 @@ open class SBUChannelViewController: SBUBaseChannelViewController {
                 // background refresh to check if user is banned or not.
                 self.refreshChannel()
                 
-                SBUEmojiManager.shared.useReactionCurrentChannel
-                    = channel?.isSuper == false && channel?.isBroadcast == false
-                
                 if let titleView = self.titleView as? SBUChannelTitleView {
                     titleView.configure(channel: self.channel, title: self.channelName)
                 }
@@ -807,34 +804,8 @@ open class SBUChannelViewController: SBUBaseChannelViewController {
             self.resendMessage(failedMessage: userMessage)
            
         case let fileMessage as SBDFileMessage:
-            // File message type
-            switch fileMessage.sendingStatus {
-            case .pending:
-                break
-            case .failed:
-                guard fileMessage.sender?.userId == SBUGlobals.CurrentUser?.userId else { return }
-                self.resendMessage(failedMessage: fileMessage)
-            case .succeeded:
-                switch SBUUtils.getFileType(by: fileMessage) {
-                case .image:
-                    let viewer = SBUFileViewer(fileMessage: fileMessage, delegate: self)
-                    let naviVC = UINavigationController(rootViewController: viewer)
-                    self.present(naviVC, animated: true)
-                case .etc, .pdf:
-                    guard let url = URL(string: fileMessage.url) else { return }
-                    let safariVC = SFSafariViewController(url: url)
-                    self.present(safariVC, animated: true, completion: nil)
-                case .video, .audio:
-                    guard let url = URL(string: fileMessage.url) else { return }
-                    let vc = AVPlayerViewController()
-                    vc.player = AVPlayer(url: url)
-                    self.present(vc, animated: true) { vc.player?.play() }
-                default:
-                    break
-                }
-            default:
-                break
-            }
+            self.openFile(fileMessage: fileMessage)
+
         case _ as SBDAdminMessage:
             // Admin message type
             break
@@ -842,6 +813,53 @@ open class SBUChannelViewController: SBUBaseChannelViewController {
             break
         }
     }
+    
+    func openFile(fileMessage: SBDFileMessage) {
+        // File message type
+        switch fileMessage.sendingStatus {
+        case .pending:
+            break
+        case .failed:
+            guard fileMessage.sender?.userId == SBUGlobals.CurrentUser?.userId else { return }
+            self.resendMessage(failedMessage: fileMessage)
+        case .succeeded:
+            switch SBUUtils.getFileType(by: fileMessage) {
+            case .image:
+                let viewer = SBUFileViewer(fileMessage: fileMessage, delegate: self)
+                let naviVC = UINavigationController(rootViewController: viewer)
+                self.present(naviVC, animated: true)
+            case .etc, .pdf:
+                guard let url = URL(string: fileMessage.url),
+                   let fileURL = SBUCacheManager.saveAndLoadFileToLocal(url: url, fileName: fileMessage.name)  else {
+                    SBUToastManager.showToast(parentVC: self, type: .fileOpenFailed)
+                    return
+                }
+                if fileURL.scheme == "file" {
+                    let dc = UIDocumentInteractionController(url: fileURL)
+                    dc.name = fileMessage.name
+                    dc.delegate = self
+                    dc.presentPreview(animated: true)
+                } else {
+                    let safariVC = SFSafariViewController(url: fileURL)
+                    self.present(safariVC, animated: true, completion: nil)
+                }
+            case .video, .audio:
+                guard let url = URL(string: fileMessage.url),
+                   let fileURL = SBUCacheManager.saveAndLoadFileToLocal(url: url, fileName: fileMessage.name)  else {
+                    SBUToastManager.showToast(parentVC: self, type: .fileOpenFailed)
+                    return
+                }
+                let vc = AVPlayerViewController()
+                vc.player = AVPlayer(url: fileURL)
+                self.present(vc, animated: true) { vc.player?.play() }
+            default:
+                break
+            }
+        default:
+            break
+        }
+    }
+    
 
     /// This function sets the cell's long tap gesture handling.
     /// - Parameters:
@@ -883,7 +901,7 @@ open class SBUChannelViewController: SBUBaseChannelViewController {
                 let types: [MessageMenuItem] = isCurrentUser ? [.copy, .edit, .delete] : [.copy]
                 cell.isSelected = true
                 
-                if SBUEmojiManager.useReaction {
+                if SBUEmojiManager.useReaction(channel: self.channel) {
                     self.showMenuViewController(cell, message: message, types: types)
                 } else {
                     self.showMenuModal(cell, indexPath: indexPath,  message: message, types: types)
@@ -921,7 +939,7 @@ open class SBUChannelViewController: SBUBaseChannelViewController {
                 let types: [MessageMenuItem] = isCurrentUser ? [.save, .delete] : [.save]
                 cell.isSelected = true
                 
-                if SBUEmojiManager.useReaction {
+                if SBUEmojiManager.useReaction(channel: self.channel) {
                     self.showMenuViewController(cell, message: message, types: types)
                 } else {
                     self.showMenuModal(cell, indexPath: indexPath, message: message, types: types)
@@ -1307,7 +1325,9 @@ open class SBUChannelViewController: SBUBaseChannelViewController {
     public func showMenuViewController(_ cell: SBUBaseMessageCell,
                                        message: SBDBaseMessage,
                                        types: [MessageMenuItem]) {
-        let menuVC = SBUMenuViewController(message: message, itemTypes: types)
+        let useReaction = SBUEmojiManager.useReaction(channel: self.channel)
+        
+        let menuVC = SBUMenuViewController(message: message, itemTypes: types, useReaction: useReaction)
         menuVC.modalPresentationStyle = .custom
         menuVC.transitioningDelegate = self
         self.present(menuVC, animated: true)
@@ -1443,6 +1463,11 @@ open class SBUChannelViewController: SBUBaseChannelViewController {
             return UITableViewCell()
         }
         
+        guard indexPath.row < self.fullMessageList.count else {
+            self.didReceiveError("The index is out of range.")
+            return UITableViewCell()
+        }
+        
         let message = self.fullMessageList[indexPath.row]
 
         let cell = tableView.dequeueReusableCell(
@@ -1461,6 +1486,8 @@ open class SBUChannelViewController: SBUBaseChannelViewController {
         
         let isSameDay = self.checkSameDayAsNextMessage(currentIndex: indexPath.row)
         let receiptState = SBUUtils.getReceiptStateIfExists(for: channel, message: message)
+        let useReaction = SBUEmojiManager.useReaction(channel: self.channel)
+        
         switch (message, messageCell) {
             
         // Amdin Message
@@ -1475,7 +1502,8 @@ open class SBUChannelViewController: SBUBaseChannelViewController {
                 unknownMessage,
                 hideDateView: isSameDay,
                 groupPosition: self.getMessageGroupingPosition(currentIndex: indexPath.row),
-                receiptState: receiptState
+                receiptState: receiptState,
+                useReaction: useReaction
             )
             self.setUnkownMessageCellGestures(
                 unknownMessageCell,
@@ -1489,7 +1517,8 @@ open class SBUChannelViewController: SBUBaseChannelViewController {
                 userMessage,
                 hideDateView: isSameDay,
                 groupPosition: self.getMessageGroupingPosition(currentIndex: indexPath.row),
-                receiptState: receiptState
+                receiptState: receiptState,
+                useReaction: useReaction
             )
             userMessageCell.configure(highlightInfo: self.highlightInfo)
             
@@ -1505,7 +1534,8 @@ open class SBUChannelViewController: SBUBaseChannelViewController {
                 fileMessage,
                 hideDateView: isSameDay,
                 groupPosition: self.getMessageGroupingPosition(currentIndex: indexPath.row),
-                receiptState: receiptState
+                receiptState: receiptState,
+                useReaction: useReaction
             )
             fileMessageCell.configure(highlightInfo: self.highlightInfo)
             
@@ -1756,5 +1786,12 @@ extension SBUChannelViewController: SBDChannelDelegate, SBDConnectionDelegate {
     open func didSucceedReconnection() {
         SBULog.info("Did succeed reconnection")
         self.refreshChannel(applyChangelog: true)
+    }
+}
+
+
+extension SBUChannelViewController: UIDocumentInteractionControllerDelegate {
+    public func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+        return self//or use return self.navigationController for fetching app navigation bar colour
     }
 }

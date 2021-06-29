@@ -145,7 +145,7 @@ Sendbird UIKit offers features to attach or save files such as photos, videos, a
 
 Applications must acquire permission to use end users’ photo assets or to save assets into their library. Once the permission is granted, users can send image or video messages and save media assets.
 
-```Light Color Skin
+```xml
 ...
 <key>NSPhotoLibraryUsageDescription</key>
     <string>$(PRODUCT_NAME) would like access to your photo library</string>
@@ -177,7 +177,7 @@ UIKit is distributed in the form of a fat binary, which contains information on 
 
 Go to your Xcode project target's **Build Phases** tab. Then, click **+** and select **New Run Script Phase**. Append this script.
 
-```Light Color Skin
+```bash
 APP_PATH="${TARGET_BUILD_DIR}/${WRAPPER_NAME}"
 
 # This script loops through the frameworks embedded in the application and

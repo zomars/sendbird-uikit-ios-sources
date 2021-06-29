@@ -290,9 +290,12 @@ open class SBUModerationsViewController: SBUBaseViewController {
         self.navigationController?.pushViewController(memberListVC, animated: true)
     }
     
+    @available(*, deprecated, message: "deprecated in 2.1.9", renamed: "showMutedMemberList")
+    open func showMutedMeberList() { self.showMutedMemberList() }
+    
     /// This is a function that shows the muted member List.
     /// If you want to use a custom MemberListViewController, override it and implement it.
-    open func showMutedMeberList() {
+    open func showMutedMemberList() {
         guard let channel = self.channel else {
             SBULog.error("[Failed] Channel object is nil")
             return
@@ -301,9 +304,12 @@ open class SBUModerationsViewController: SBUBaseViewController {
         self.navigationController?.pushViewController(memberListVC, animated: true)
     }
     
+    @available(*, deprecated, message: "deprecated in 2.1.9", renamed: "showMutedMemberList")
+    open func showBannedMeberList() { self.showBannedMemberList() }
+    
     /// This is a function that shows the banned member List.
     /// If you want to use a custom MemberListViewController, override it and implement it.
-    open func showBannedMeberList() {
+    open func showBannedMemberList() {
         guard let channel = self.channel else {
             SBULog.error("[Failed] Channel object is nil")
             return
@@ -343,9 +349,9 @@ extension SBUModerationsViewController: UITableViewDelegate, UITableViewDataSour
         case .operators:
             self.showOperatorList()
         case .mutedMembers:
-            self.showMutedMeberList()
+            self.showMutedMemberList()
         case .bannedMembers:
-            self.showBannedMeberList()
+            self.showBannedMemberList()
         case .freezeChannel:
             break
         default:

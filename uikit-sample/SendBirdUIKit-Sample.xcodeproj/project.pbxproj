@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2E79897A8FDCB52BA1911F21 /* libPods-SendBirdUIKit-Sample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 707286E9F4FB5E6C041CB07D /* libPods-SendBirdUIKit-Sample.a */; };
+		9C0E9688268B21B5002B50F4 /* SBUToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0E9686268B21B4002B50F4 /* SBUToastManager.swift */; };
+		9C0E9689268B21B5002B50F4 /* SBUCacheManager.File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0E9687268B21B4002B50F4 /* SBUCacheManager.File.swift */; };
 		9C2AA7E325611A8200C6F6CB /* MainOpenChannelTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2AA7E225611A8200C6F6CB /* MainOpenChannelTabbarController.swift */; };
 		9C2AA7E625611EB100C6F6CB /* MyOpenChannelSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2AA7E525611EB100C6F6CB /* MyOpenChannelSettingsViewController.swift */; };
 		9C2AA7E82561255800C6F6CB /* StreamingChannelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2AA7E72561255800C6F6CB /* StreamingChannelListViewController.swift */; };
@@ -193,6 +195,8 @@
 /* Begin PBXFileReference section */
 		707286E9F4FB5E6C041CB07D /* libPods-SendBirdUIKit-Sample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SendBirdUIKit-Sample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7421701286ECCC463A517183 /* Pods-SendBirdUIKit-Sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SendBirdUIKit-Sample.debug.xcconfig"; path = "Target Support Files/Pods-SendBirdUIKit-Sample/Pods-SendBirdUIKit-Sample.debug.xcconfig"; sourceTree = "<group>"; };
+		9C0E9686268B21B4002B50F4 /* SBUToastManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBUToastManager.swift; sourceTree = "<group>"; };
+		9C0E9687268B21B4002B50F4 /* SBUCacheManager.File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBUCacheManager.File.swift; sourceTree = "<group>"; };
 		9C2AA7E225611A8200C6F6CB /* MainOpenChannelTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOpenChannelTabbarController.swift; sourceTree = "<group>"; };
 		9C2AA7E525611EB100C6F6CB /* MyOpenChannelSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOpenChannelSettingsViewController.swift; sourceTree = "<group>"; };
 		9C2AA7E72561255800C6F6CB /* StreamingChannelListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamingChannelListViewController.swift; sourceTree = "<group>"; };
@@ -763,6 +767,8 @@
 		C6D3DBEE261411EA003E6DCB /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				9C0E9687268B21B4002B50F4 /* SBUCacheManager.File.swift */,
+				9C0E9686268B21B4002B50F4 /* SBUToastManager.swift */,
 				C6D3DBEF261411EA003E6DCB /* SBUEmojiManager.swift */,
 				C6D3DBF0261411EA003E6DCB /* SBUPendingMessageManager.swift */,
 				C6D3DBF1261411EA003E6DCB /* SBUDownloadManager.swift */,
@@ -1314,6 +1320,7 @@
 				9C32648324B38FAF000F8313 /* ChannelSettingsVC_Overriding.swift in Sources */,
 				C6D3DD9C26141C00003E6DCB /* SBUCoverImageView.swift in Sources */,
 				C6D3DDB126141C00003E6DCB /* SBUChannelSettingCell.swift in Sources */,
+				9C0E9688268B21B5002B50F4 /* SBUToastManager.swift in Sources */,
 				9C32648124B37DD2000F8313 /* CustomUserMessageCell.swift in Sources */,
 				9CEB7799250F5E2F004AC1D6 /* ChannelListViewController.swift in Sources */,
 				C6D3DD9026141C00003E6DCB /* SBUMessageWebView.swift in Sources */,
@@ -1359,6 +1366,7 @@
 				C6D3DD7926141C00003E6DCB /* SBUBaseChannelViewController.swift in Sources */,
 				C6D3DC7F261411EA003E6DCB /* SBUEnums.swift in Sources */,
 				C6D3DDAD26141C00003E6DCB /* SBUMessageSearchResultCell.swift in Sources */,
+				9C0E9689268B21B5002B50F4 /* SBUCacheManager.File.swift in Sources */,
 				C6D3DD8E26141C00003E6DCB /* SBUUserMessageTextView.swift in Sources */,
 				9CDDA30724B4DA9000F77A59 /* MemberListVC_Overriding.swift in Sources */,
 				A9F1B1B62579F28B008DEB11 /* CreateCommunityChannelViewController.swift in Sources */,

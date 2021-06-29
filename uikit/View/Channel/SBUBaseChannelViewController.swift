@@ -101,11 +101,11 @@ open class SBUBaseChannelViewController: SBUBaseViewController {
         self.startingPoint = nil
         super.init(nibName: nil, bundle: nil)
         SBULog.info("")
-        
-        self.baseChannel = baseChannel
-        self.channelUrl = baseChannel.channelUrl
 
         self.customizedMessageListParams = messageListParams
+
+        self.baseChannel = baseChannel
+        self.channelUrl = baseChannel.channelUrl
     }
     
     /// If you don't have channel object and have channelUrl, use this initialize function. And, if you have own message list params, please set it. If not set, it is used as the default value.
@@ -125,10 +125,10 @@ open class SBUBaseChannelViewController: SBUBaseViewController {
         self.startingPoint = nil
         super.init(nibName: nil, bundle: nil)
         SBULog.info("")
-        
-        self.channelUrl = channelUrl
 
         self.customizedMessageListParams = messageListParams
+
+        self.channelUrl = channelUrl
     }
     
     /// Use this initializer to enter a channel to start from a specific timestamp..
@@ -143,9 +143,10 @@ open class SBUBaseChannelViewController: SBUBaseViewController {
         self.startingPoint = startingPoint
         super.init(nibName: nil, bundle: nil)
         SBULog.info("")
-        
-        self.channelUrl = channelUrl
+
         self.customizedMessageListParams = messageListParams
+
+        self.channelUrl = channelUrl
     }
     
     open override func viewWillAppear(_ animated: Bool) {
@@ -830,7 +831,7 @@ open class SBUBaseChannelViewController: SBUBaseViewController {
                     guard let self = self else { return }
                     guard let fileMessage = message as? SBDFileMessage else { return }
                     
-                    SBUDownloadManager.saveFile(with: fileMessage, parent: self)
+                    SBUDownloadManager.save(fileMessage: fileMessage, parent: self)
                 }
             }
         }

@@ -90,7 +90,10 @@ open class SBUUserMessageCell: SBUContentBaseMessageCell {
     open func configure(_ message: SBDUserMessage,
                           hideDateView: Bool,
                           groupPosition: MessageGroupPosition,
-                          receiptState: SBUMessageReceiptState?) {
+                          receiptState: SBUMessageReceiptState?,
+                          useReaction: Bool) {
+        self.useReaction = useReaction
+        
         self.configure(
             message,
             hideDateView: hideDateView,

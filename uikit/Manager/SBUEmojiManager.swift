@@ -18,8 +18,7 @@ public class SBUEmojiManager: NSObject {
     private var emojiHash: String? {
         container?.emojiHash
     }
-    var useReactionCurrentChannel: Bool = false
- 
+
     
     // MARK: - Public function
     
@@ -111,9 +110,11 @@ public class SBUEmojiManager: NSObject {
 
     
     // MARK: - private function
-    static var useReaction: Bool {
+    static func useReaction(channel: SBDBaseChannel?) -> Bool {
+        guard let groupChannel = channel as? SBDGroupChannel else { return false }
+        
         if let appInfo = SBDMain.getAppInfo(),
-            appInfo.useReaction, shared.useReactionCurrentChannel {
+           appInfo.useReaction, !groupChannel.isSuper, !groupChannel.isBroadcast  {
             return true
         } else {
             return false

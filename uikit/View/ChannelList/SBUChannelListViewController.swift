@@ -739,6 +739,11 @@ extension SBUChannelListViewController: UITableViewDataSource, UITableViewDelega
     
     open func tableView(_ tableView: UITableView,
                         cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard indexPath.row < self.channelList.count else {
+            self.didReceiveError("The index is out of range.")
+            return UITableViewCell()
+        }
+        
         let channel = self.channelList[indexPath.row]
         
         var cell: SBUBaseChannelCell? = nil

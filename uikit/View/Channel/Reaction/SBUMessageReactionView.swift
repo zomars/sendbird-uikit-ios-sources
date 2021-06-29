@@ -103,8 +103,8 @@ class SBUMessageReactionView: UIView, UICollectionViewDelegate, UICollectionView
             self.reactions.count == indexPath.row
     }
     
-    func configure(maxWidth: CGFloat, reactions: [SBDReaction]) {
-        guard SBUEmojiManager.useReaction, !reactions.isEmpty else {
+    func configure(maxWidth: CGFloat, useReaction: Bool, reactions: [SBDReaction]) {
+        guard useReaction, !reactions.isEmpty else {
             self.collectionViewMinWidthContraint.isActive = false
             self.isHidden = true
             return

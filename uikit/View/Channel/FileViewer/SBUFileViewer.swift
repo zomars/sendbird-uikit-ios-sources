@@ -185,6 +185,10 @@ class SBUFileViewer: SBUBaseViewController, UIScrollViewDelegate {
         
         guard let urlString = urlString else { return }
         self.imageView.loadImage(urlString: urlString)
+        
+        if let url = URL(string: urlString), let fileMessage = fileMessage {
+            SBUCacheManager.saveAndLoadFileToLocal(url: url, fileName: fileMessage.name)
+        }
     }
     
     open override func viewWillAppear(_ animated: Bool) {

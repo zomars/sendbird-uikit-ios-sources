@@ -14,7 +14,9 @@ open class SBUUnknownMessageCell: SBUUserMessageCell {
     open override func configure(_ message: SBDBaseMessage,
                                    hideDateView: Bool,
                                    groupPosition: MessageGroupPosition,
-                                   receiptState: SBUMessageReceiptState?) {
+                                   receiptState: SBUMessageReceiptState?,
+                                   useReaction: Bool) {
+        self.useReaction = useReaction
         
         self.configure(
             message,
