@@ -14,8 +14,12 @@ class SBUDownloadManager: NSObject {
     
     static func saveImage(parent: UIViewController?, url: URL, fileName: String) {
         DispatchQueue.global(qos: .background).async {
-            guard let parent = parent,
-                  let fileURL = SBUCacheManager.saveAndLoadFileToLocal(url: url, fileName: fileName) else {
+            guard let parent = parent else {
+                SBULog.error("[Failed] Save image")
+                return
+            }
+            
+            guard let fileURL = SBUCacheManager.saveAndLoadFileToLocal(url: url, fileName: fileName) else {
                 SBUToastManager.showToast(parentVC: parent, type: .fileDownloadFailed)
                 SBULog.error("[Failed] Save image")
                 return
