@@ -25,7 +25,7 @@ The minimum requirements for UIKit for iOS are:
 
 - iOS 10.3 or later
 - Swift 4.2 or later / Objective-C
-- Chat SDK for iOS is 3.0.216 or later
+- Chat SDK for iOS is 3.0.226 or later
 
 > Note: Sendbird UIKit for iOS is Sendbird Chat SDK-dependent. If you install the UIKit, `CocoaPods` will automatically install the Chat SDK for iOS as well. 
 
@@ -43,14 +43,17 @@ This section explains the steps you need to take before testing the sample app.
 
 Create a project to get started. Sendbird UIKit supports both `Objective-C` and `Swift`, so you can create and work on a project in the language you want to develop with.
 
-### Install UIKit for iOS
 
-The sample uses source files from `uikit` folder directly, but you can also install UIKit for iOS through either `CocoaPods` or `Carthage`.
+### Install UIKit for iOS 
+
+UIKit for iOS can be installed through either [`CocoaPods`](https://cocoapods.org/), [`Carthage`](https://github.com/Carthage/Carthage) or [`Swift Package Manager`](https://swift.org/package-manager/): 
+
+> Note: Sendbird UIKit for iOS is Sendbird Chat SDK-dependent. The minimum requirement of the Chat SDK for iOS is 3.0.226 or higher.
+
 
 #### - CocoaPods
 
 1. Add `SendBirdUIKit` into your `Podfile` in Xcode as below:
-
 ```bash
 platform :ios, '10.3' 
 use_frameworks! 
@@ -61,46 +64,45 @@ end
 ```
 
 2. Install the `SendBirdUIKit` framework through `CocoaPods`.
-
 ```bash
 $ pod install
 ```
 
 3. Update the `SendBirdUIKit` framework through `CocoaPods`.
-
 ```bash
 $ pod update 
 ```
 
-> __Note__: Sendbird UIKit for iOS is `Sendbird Chat SDK-dependent`. If you install the UIKit, `CocoaPods` will automatically install the Chat SDK for iOS as well. The minimum requirement of the Chat SDK for iOS is 3.0.216 or later. 
-
 #### - Carthage
 
-1.Add `SendBirdUIKit`and `SendBirdSDK`into your `Cartfile` as below:
-
-> __Note__: Sendbird UIKit for iOS is `Sendbird Chat SDK-dependent`. The minimum requirement of the Chat SDK for iOS is 3.0.216 or later. 
+1. Add `SendBirdUIKit` and `SendBirdSDK` into your `Cartfile` as below:
 
 ```bash
 github "sendbird/sendbird-uikit-ios"
-github "sendbird/sendbird-ios-framework" == 3.0.216
+github "sendbird/sendbird-ios-framework" == 3.0.226
 ```
 
 2. Install the `SendBirdUIKit` framework through `Carthage`.
 
 ```bash
-$ carthage update
-```
-
-3. Go to your Xcode project target’s **General settings** tab in the `Frameworks and Libraries` section. Then drag and drop on the disk each framework from the `<YOUR_XCODE_PROJECT_DIRECTORY>/Carthage/Build/iOS` folder.
-4. Go to your Xcode project target’s **Build Phases settings** tab, click the **+** icon, and choose **New Run Script Phase**. Create a `Run Script`, specify your shell (ex: /bin/sh), and add `/usr/local/bin/carthage copy-frameworks` to the script below the shell.
-5. Add the following paths to the `SendBirdUIKit` and `SendBirdSDK` frameworks under `Input Files`.
-
-```bash
-$(SRCROOT)/Carthage/Build/iOS/SendBirdUIKit.framework
-$(SRCROOT)/Carthage/Build/iOS/SendBirdSDK.framework
+$ carthage update --use-xcframeworks
 ```
 
 > __Note__: Building or creating the `SendbirdUIKit` framework with `Carthage` can only be done using the latest `Swift`. If your `Swift` is not the most recent version, the framework should be copied into your project manually.
+
+3. Go to your Xcode project target's **General settings** tab in the `Frameworks and Libraries` section. Then drag and drop on the disk each framework from the `<YOUR_XCODE_PROJECT_DIRECTORY>/Carthage/Build` folder.
+
+>__Note__: Errors may occur if you're building your project with Xcode 11.3 or earlier versions. To fix these errors, refer to [Handle errors caused by unknown attributes](https://github.com/sendbird/sendbird-uikit-ios-sources#handling-errors-caused-by-unknown-attributes) in the sample app.
+
+#### - Swift Package Manager
+1. File -> Swift Packages -> Add package dependency...
+
+2. Choose Package Repository as the Sendbird UIKit repository with below link:
+```bash
+https://github.com/sendbird/sendbird-uikit-ios.git
+```
+
+3. Select Up to Next Major rules and click the Next button to add the package.
 
 #### Handling errors caused by unknown attributes
 
