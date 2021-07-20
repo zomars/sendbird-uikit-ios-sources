@@ -212,13 +212,13 @@ class SBUInviteUserListViewModel: SBUChannelActionViewModel {
             return
         }
 
-        guard self.joinedUserIds.count != 0 else {
+        guard !self.joinedUserIds.isEmpty else {
             self.userList += users
             return
         }
         
         let filteredUsers = users.filter { joinedUserIds.contains($0.userId) == false }
-        if filteredUsers.count == 0 {
+        if filteredUsers.isEmpty {
             self.isLoading = false
             let nextUserList = (self.datasource?.nextUserList()?.count ?? 0) > 0
                 ? self.datasource?.nextUserList()

@@ -223,7 +223,7 @@ open class SBUMessageSearchViewController: SBUBaseViewController {
             guard let self = self else { return }
             
             if let emptyView = self.emptyView as? SBUEmptyView {
-                emptyView.reloadData(self.searchResultList.count == 0 ? .error : .none)
+                emptyView.reloadData(self.searchResultList.isEmpty ? .error : .none)
             }
             
             self.didReceiveError(error.localizedDescription)
@@ -233,7 +233,7 @@ open class SBUMessageSearchViewController: SBUBaseViewController {
             guard let self = self else { return }
             
             if let emptyView = self.emptyView as? SBUEmptyView {
-                emptyView.reloadData(self.searchResultList.count == 0 ? .noSearchResults : .none)
+                emptyView.reloadData(self.searchResultList.isEmpty ? .noSearchResults : .none)
             }
             
             self.tableView.reloadData()

@@ -235,7 +235,7 @@ class SBUChannelTitleView: UIView {
     // MARK: - Util
     private func buildTypingIndicatorString(channel: SBDGroupChannel) -> String? {
         guard let typingMembers = channel.getTypingUsers(),
-            typingMembers.count != 0 else { return nil }
+            !typingMembers.isEmpty else { return nil }
         return SBUStringSet.Channel_Header_Typing(typingMembers)
     }
     
