@@ -20,7 +20,7 @@ class ChannelSettingsVC_Overriding: SBUChannelSettingsViewController {
     }
     
     // MARK: - Error handling
-    override func didReceiveError(_ message: String?) {
+    override func errorHandler(_ message: String?, _ code: NSInteger? = nil) {
         // If you override and customize this function, you can handle it when error received.
         print(message as Any);
     }

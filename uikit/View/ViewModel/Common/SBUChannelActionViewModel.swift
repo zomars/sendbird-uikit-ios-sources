@@ -226,6 +226,7 @@ class SBUChannelActionViewModel: SBULoadableViewModel  {
             
             if let error = error {
                 SBULog.error("[Failed] Freeze channel request:\(String(error.localizedDescription))")
+                self.errorObservable.set(value: error)
                 completionHandler?(false)
                 return
             }
@@ -252,6 +253,7 @@ class SBUChannelActionViewModel: SBULoadableViewModel  {
             
             if let error = error {
                 SBULog.error("[Failed] Unfreeze channel request:\(String(error.localizedDescription))")
+                self.errorObservable.set(value: error)
                 completionHandler?(false)
                 return
             }

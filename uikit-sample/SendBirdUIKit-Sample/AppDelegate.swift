@@ -13,7 +13,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var window: UIWindow?
     
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        SBUMain.setLogLevel(.all)
+        
         // TODO: Change to your AppId
         SBUMain.initialize(applicationId: "2D7B4CDB-932F-4082-9B09-A1153792DC8D")// origin
         

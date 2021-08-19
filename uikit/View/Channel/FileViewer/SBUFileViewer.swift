@@ -276,7 +276,7 @@ class SBUFileViewer: SBUBaseViewController, UIScrollViewDelegate {
                            didFinishSavingWithError error: NSError?,
                            contextInfo: UnsafeRawPointer) {
         if let error = error {
-            self.didReceiveError(error.localizedDescription)
+            self.errorHandler(error.localizedDescription, error.code)
             return
         }
     }
@@ -288,8 +288,22 @@ class SBUFileViewer: SBUBaseViewController, UIScrollViewDelegate {
     
     
     // MARK: - Error handling
-    open func didReceiveError(_ message: String?) {
-        
+    private func errorHandler(_ error: SBDError) {
+        self.errorHandler(error.localizedDescription, error.code)
+    }
+    
+    /// If an error occurs in viewController, a message is sent through here.
+    /// If necessary, override to handle errors.
+    /// - Parameters:
+    ///   - message: error message
+    ///   - code: error code
+    open func errorHandler(_ message: String?, _ code: NSInteger? = nil) {
+        SBULog.error("Did receive error: \(message ?? "")")
+    }
+    
+    @available(*, deprecated, message: "deprecated in 2.1.12", renamed: "errorHandler")
+    open func didReceiveError(_ message: String?, _ code: NSInteger? = nil) {
+        self.errorHandler(message, code)
     }
 }
 
